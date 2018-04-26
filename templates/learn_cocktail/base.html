@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+{% load static %}
+<head>
+  <mata charset="utf-8" />
+
+  <!-- load css -->
+  <link rel="stylesheet" href="{% static 'css/material-kit.css' %}">
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+
+  <title>{% block title %}カクテル学習サイト{% endblock %}</title>
+</head>
+<body>
+
+  <!-- ナビゲーションバー -->
+  <nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="/presentation.html">Primary Color</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation"/>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="active nav-item">
+            <a href="#pablo" class="nav-link">
+              <i class="material-icons">explore</i> Discover
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pablo" class="nav-link">
+              <i class="material-icons">account_circle</i> Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pablo" class="nav-link">
+              <i class="material-icons">settings</i> Settings
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ページコンテンツ -->
+  <div class="container">
+    {% block main_contents %}{% endblock %}
+  </div>
+
+  <!-- フッター -->
+  <div class="footer">
+
+  </div>
+
+  <!--   Core JS Files   -->
+  <script src="{% static 'js/core/jquery.min.js' %}"></script>
+  <script src="{% static 'js/core/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-material-design.js' %}"></script>
+  <!-- Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <script src="{% static 'js/plugins/bootstrap-selectpicker.js' %}"></script>
+  <!-- Plugin for Tags, full documentation here: http://xoxco.com/projects/code/tagsinput/  -->
+  <script src="{% static 'js/plugins/bootstrap-tagsinput.js' %}"></script>
+  <!-- Plugin for Small Gallery in Product Page -->
+  <script src="{% static 'js/plugins/jquery.flexisel.js' %}"></script>
+  <!-- Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="{% static 'js/plugins/nouislider.min.js' %}"></script>
+  <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
+  <script src="{% static 'js/material-kit.js?v=2.0.0' %}"></script>
+</body>
+</html>
