@@ -12,14 +12,14 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 from socket import gethostname
+from . import local_settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # import settings
 HOSTNAME = gethostname()
-if 'local' in HOSTNAME:
-    import local_settings
+if local_settings.hostname in HOSTNAME:
     SECRET_KEY = local_settings.SECRET_KEY
     DEBUG = True
 else:
