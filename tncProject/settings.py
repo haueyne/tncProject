@@ -11,10 +11,19 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from socket import gethostname
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# import settings
+HOSTNAME = gethostname()
+if 'local' in HOSTNAME:
+    import local_settings
+    SECRET_KEY = local_settings.SECRET_KEY
+    DEBUG = True
+else:
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
