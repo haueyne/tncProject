@@ -23,7 +23,7 @@ try:
     from . import local_settings
     SECRET_KEY = local_settings.SECRET_KEY
     DEBUG = True
-except Exception:
+except ImportError:
     SECRET_KEY = os.environ['SECRET_KEY']
 
 # Quick-start development settings - unsuitable for production
