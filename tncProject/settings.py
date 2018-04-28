@@ -15,6 +15,8 @@ from socket import gethostname
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT2 = os.path.dirname(os.path.abspath(__file__))
 
 # import settings
 HOSTNAME = gethostname()
