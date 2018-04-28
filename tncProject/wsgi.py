@@ -15,4 +15,4 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tncProject.settings")
 
-application = DjangoWhiteNoise(Cling(et_wsgi_application()))
+application = DjangoWhiteNoise(Cling(get_wsgi_application()))
