@@ -147,3 +147,5 @@ STATICFILES_DIRS = (
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+WHITENOISE_ROOT = os.join(BASE_DIR, STATIC_ROOT, 'root')
