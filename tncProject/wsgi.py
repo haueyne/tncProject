@@ -15,5 +15,5 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tncProject.settings")
 
-# application = Cling(get_wsgi_application())
-application = DjangoWhiteNoise(get_wsgi_application())
+application = Cling(get_wsgi_application())
+# application = DjangoWhiteNoise(get_wsgi_application())
