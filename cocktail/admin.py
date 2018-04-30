@@ -31,8 +31,8 @@ class CocktailAdmin(admin.ModelAdmin):
     inlines = [RecipeInline, CategoryInline]
 
 
-admin.site.register(Construction)
-admin.site.register(Kind, KindAdmin)
-admin.site.register(Ingredients, IngredientsAdmin)
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Cocktail, CocktailAdmin)
+# admin.site.register(Construction)
+# admin.site.register(Kind, KindAdmin)
+# admin.site.register(Ingredients, IngredientsAdmin)
+# admin.site.register(Category, CategoryAdmin)
+# admin.site.register(Cocktail, CocktailAdmin)

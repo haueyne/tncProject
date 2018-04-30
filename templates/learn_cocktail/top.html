@@ -1,7 +1,12 @@
 {% extends "learn_cocktail/base.html" %}
 
 {% block main_contents %}
-<p>
-  トップページだよ
+<p class="h4">
+  カクテル学習用のサイトです。<br />
+  下のボタンから問題ページに移動できます。
 </p>
+
+<!-- 学習ページ遷移ボタン -->
+<a class="btn btn-primary" href="{% url 'question' %}" role="button">learn cocktails</a>
+
 {% endblock %}

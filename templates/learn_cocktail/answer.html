@@ -1,7 +1,21 @@
 {% extends "learn_cocktail/base.html" %}
 
 {% block main_contents %}
-<p>
-  回答ページです
+<p class="h2">
+  正解です
 </p>
+
+<div class="card col-xs-12 col-sm-10 col-md-8 col-xl-6">
+  <!-- TODO 出題画像の表示をする
+  <img class="card-img-top" src="..." alt="Card image cap">
+  -->
+  <div class="card-body">
+    <p class="h3 card-title">{{ cocktail.name }}</p>
+    <p class="card-text">このカクテルの原材料を次の中からすべて選択して決定ボタンを押下してください。</p>
+  </div>
+</div>
+
+<a class="btn btn-primary" href="{% url 'question' %}" role="button">問題へ</a>
+<a class="btn btn-primary" href="{% url 'top' %}" role="button">トップへ</a>
+
 {% endblock %}
