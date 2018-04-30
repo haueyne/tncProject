@@ -38,8 +38,6 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'cocktail',
-    'learn_cocktail',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +46,8 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     # 'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'learn_cocktail',
+    'cocktail',
 ]
 
 MIDDLEWARE = [
