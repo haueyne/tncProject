@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models.aggregates import Count
 from .forms import QuestionForm
-from .models import Cocktail
+from .models import Cocktail, Material
 
 # Create your views here.
 
@@ -21,7 +21,7 @@ def _check_answer(cocktail, choiced_materials):
     result = {'text': '不正解です', 'css-class': 'text-danger'}
     answer_item_css = {}
     match_counter = 0
-    
+
     cocktail_materials = cocktail.materials.all()
     for material in cocktail_materials:
         if material in choiced_materials:
@@ -44,18 +44,24 @@ def top(request):
 def question(request):
     """問題ページのビュー"""
     form = QuestionForm()
-    # TODO この方法は遅いため、別の方法を作成する
-    cocktail = Cocktail.objects.order_by('?').first()
-    return render(request, 'learn_cocktail/question.html',{
+    cocktail = _get_one_item_randomly(Cocktail)
+    return render(request, 'learn_cocktail/question.html', {
         'form': form,
         'question_cocktail': cocktail,
     })
 
+
 def answer(request):
     """回答結果ページのビュー"""
-    question_cocktail = request.POST.get('question')
-    choices_materials = request.POST.getlist('materials')
+    q_cocktail = Cocktail.objects.get(pk=request.POST.get('q_cocktail'))
+    mats = request.POST.getlist('choice_materials')
+    choiced_materials = Material.objects.in_bulk(id_list=mats,
+                                                 field_name='pk')
+    result = _check_answer(q_cocktail, choiced_materials)
     return render(request, 'learn_cocktail/answer.html', {
-        'cocktail': question_cocktail,
-        'choiced_materials': choice_materials,
+        'q_cocktail': q_cocktail,
+        'choiced_materials': choiced_materials,
+        'result_txt': result['text'],
+        'result_css_cls': result['css-class'],
+        'answer_item_css_cls': result['answer-css-set'],
     })

@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Kind(models.Model):
     """カクテル原料の種別"""
     name = models.CharField(max_length=32)
@@ -18,7 +19,7 @@ class Kind(models.Model):
 class Material(models.Model):
     """カクテル原料"""
     name = models.CharField(max_length=128)
-    kind = models.ForeignKey(Kind, on_delete=models.CASCADE)
+    kind = models.ForeignKey('Kind', on_delete=models.CASCADE)
     # alc_per = models.PositiveIntegerField(default=0)
     is_show = models.BooleanField(default=True)
 

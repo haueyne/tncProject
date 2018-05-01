@@ -3,15 +3,15 @@
 {% block main_contents %}
 
 <!--<form class="" action="" method="post">-->
-<form class="" action="{% url 'answer' %}" method="post">
+<form action="{% url 'answer' %}" method="post">
   {% csrf_token %}
   <div class="card col-xs-12 col-sm-10 col-md-8 col-xl-6">
     <!-- TODO 出題画像の表示をする
     <img class="card-img-top" src="..." alt="Card image cap">
     -->
     <div class="card-body">
-      <p class="h3 card-title">{{ question_cocktail.name }}</p>
-      <input type="hidden" name="question" value="{{ question_cocktail }}" />
+      <p class="h3 card-title">{{ question_cocktail }}</p>
+      <input type="hidden" name="q_cocktail" value="{{ question_cocktail.pk }}" />
       <p class="card-text">原材料を次の中からすべて選択して回答ボタンを押下してください。</p>
     </div>
   </div>
@@ -20,12 +20,13 @@
     <div class="card-body">
       <p class="h5 card-title">選択肢</p>
       <div class="card-text btn-group d-block" data-toggle="buttons">
-        {% for material in form.choice_materials %}
-          <label class="btn btn-outline-info m-1">
-            <input type="checkbox" class="d-none" autocomplete="off"/>
-            {{material}}
-          </label>
-        {% endfor %}
+        <ul>
+          {% for material in form.choice_materials %}
+          <li class="btn btn-outline-info m-1">
+            {{ material.tag }}{{ material.choice_label }}
+          </li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
   </div>

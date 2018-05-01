@@ -1,8 +1,9 @@
 {% extends "learn_cocktail/base.html" %}
+{% load extra_tags %}
 
 {% block main_contents %}
-<p class="h2">
-  正解です
+<p class="h2 {{ result_css_cls }}">
+  {{ result_txt }}
 </p>
 
 <div class="card col-xs-12 col-sm-10 col-md-8 col-xl-6">
@@ -10,8 +11,16 @@
   <img class="card-img-top" src="..." alt="Card image cap">
   -->
   <div class="card-body">
-    <p class="h3 card-title">{{ cocktail.name }}</p>
-    <p class="card-text">このカクテルの原材料を次の中からすべて選択して決定ボタンを押下してください。</p>
+    <p class="h3 card-title">{{ q_cocktail }}</p>
+    <p class="card-text">
+      <ul class="pl-4 list-group">
+        {% for material in q_cocktail.materials.all %}
+        <li class="m-1 list-unstyled {{ answer_item_css_cls|get_dict_value:material.pk }} col-xs-10 col-sm-8 col-md-5 col-xl-3">
+          {{ material }}
+        </li>
+        {% endfor %}
+      </ul>
+    </p>
   </div>
 </div>
 
