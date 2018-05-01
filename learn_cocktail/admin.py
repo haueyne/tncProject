@@ -14,20 +14,20 @@ class RecipeInline(admin.TabularInline):
 
 
 class CocktailAdmin(admin.ModelAdmin):
-    fields = ['name', 'alc_per', 'how_to_make', 'is_show']
     inlines = [RecipeInline]
+    list_display = ('name', 'how_to_make', 'is_show')
 
 
 class KindAdmin(admin.ModelAdmin):
-    fields = ['name', 'is_show']
+    list_display = ('name', 'is_show')
 
 
 class HowToMakeAdmin(admin.ModelAdmin):
-    fields = ['name', 'is_show']
+    list_display = ('name', 'is_show')
 
 
 class MaterialAdmin(admin.ModelAdmin):
-    fields = ['name', 'alc_per', 'kind', 'is_show']
+    list_display = ('name', 'alc_per', 'kind', 'is_show')
 
 
 admin.site.register(Kind, KindAdmin)
