@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.top, name='top'),
     path('question/', views.question, name='question'),
     path('answer/', views.answer, name='answer'),
+    path('cocktail-list/', views.cocktail_list, name='cocktail_list'),
 ]

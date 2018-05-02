@@ -1,0 +1,51 @@
+{% extends "learn_cocktail/base.html" %}
+
+
+{% block title %}カクテル一覧{% endblock %}
+
+
+{% block main_contents %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>カクテル名</th>
+        <th>作り方</th>
+        <th>レシピ</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cocktail in cocktails %}
+      <tr>
+        <td>{{ cocktail }}</td>
+        <td>{{ cocktail.how_to_make }}</td>
+        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal_{{ cocktail.pk }}">
+          show
+        </button></td>
+      </tr>
+
+      <!-- モーダル表示部分 -->
+      <div class="modal fade" id="myModal_{{ cocktail.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">{{ cocktail }}</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ul class="list-group">
+                {% for material in cocktail.materials.all %}
+                  <li class="list-group-item list-group-item-info m-1">
+                    {{ material }}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div><!-- /.modal-body -->
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock main_contents %}

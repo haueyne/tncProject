@@ -64,3 +64,10 @@ def answer(request):
         'result_css_cls': ans_result['css-class'],
         'answer_item_css_cls': ans_result['answer-css-set'],
     })
+
+
+def cocktail_list(request):
+    cocktails = Cocktail.objects.all()
+    return render(request, 'learn_cocktail/cocktail_list.html', {
+        'cocktails': cocktails,
+    })
