@@ -15,7 +15,7 @@
     <p class="card-text">
       <ul class="pl-4 list-group">
         {% for material in q_cocktail.materials.all %}
-        <li class="m-1 list-unstyled {{ answer_item_css_cls|get_dict_value:material.pk }} col-xs-10 col-sm-8 col-md-5 col-xl-3">
+        <li class="m-1 list-group-item {{ answer_item_css_cls|get_dict_value:material.pk }} col-xs-8 col-sm-8 col-md-8 col-xl-8">
           {{ material }}
         </li>
         {% endfor %}
@@ -23,6 +23,18 @@
     </p>
   </div>
 </div>
+
+<!-- 選択結果の表示
+<div class="card col-xs-12 col-sm-10 col-md-8 col-xl-6">
+  <ul class="list-group">
+    {% for material in choiced_materials %}
+    <li class="list-group-item list-group-item-info m-1">
+      {{ material }}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+-->
 
 <a class="btn btn-primary" href="{% url 'question' %}" role="button">問題へ</a>
 <a class="btn btn-primary" href="{% url 'top' %}" role="button">トップへ</a>

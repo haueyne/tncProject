@@ -29,7 +29,7 @@ def _check_answer(cocktail, choiced_materials):
             answer_item_css[material.pk] = 'list-group-item-success'
         else:
             answer_item_css[material.pk] = 'list-group-item-danger'
-    if match_counter == len(choiced_materials):
+    if match_counter == len(cocktail_materials):
         result['text'] = '正解です'
         result['css-class'] = 'text-success'
     result['answer-css-set'] = answer_item_css
@@ -54,14 +54,13 @@ def question(request):
 def answer(request):
     """回答結果ページのビュー"""
     q_cocktail = Cocktail.objects.get(pk=request.POST.get('q_cocktail'))
-    mats = request.POST.getlist('choice_materials')
-    choiced_materials = Material.objects.in_bulk(id_list=mats,
-                                                 field_name='pk')
-    result = _check_answer(q_cocktail, choiced_materials)
+    choiced_materials = Material.objects.filter(
+        id__in=request.POST.getlist('choice_materials'))
+    ans_result = _check_answer(q_cocktail, choiced_materials)
     return render(request, 'learn_cocktail/answer.html', {
         'q_cocktail': q_cocktail,
         'choiced_materials': choiced_materials,
-        'result_txt': result['text'],
-        'result_css_cls': result['css-class'],
-        'answer_item_css_cls': result['answer-css-set'],
+        'result_txt': ans_result['text'],
+        'result_css_cls': ans_result['css-class'],
+        'answer_item_css_cls': ans_result['answer-css-set'],
     })
