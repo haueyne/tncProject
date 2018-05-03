@@ -21,15 +21,18 @@
   <!-- ナビゲーションバー -->
   <nav class="navbar navbar-expand-lg bg-primary">
     <div class="container">
-      <span class="navbar-text">
-        Learning Cocktails
-      </span>
+      <span class="navbar-brand h4 mr-3 font-weight-bold">Learning Cocktails</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+      </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item active ml-1 mr-1">
+          <li class="nav-item ml-1 mr-1">
             <a class="nav-link" href="{% url 'top' %}">Home</a>
           </li>
-          <li class="nav-item active ml-1 mr-1">
+          <li class="nav-item ml-1 mr-1">
             <a class="nav-link" href="{% url 'cocktail_list' %}">List</a>
           </li>
         </ul>
@@ -49,6 +52,9 @@
   <script src="{% static 'learn_cocktail/js/core/jquery.min.js' %}"></script>
   <script src="{% static 'learn_cocktail/js/core/popper.min.js' %}"></script>
   <script src="{% static 'learn_cocktail/js/bootstrap-material-design.min.js' %}"></script>
-
+  <!-- Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="{% static 'learn_cocktail/js/plugins/nouislider.min.js' %}"></script>
+  <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
+  <script src="{% static 'learn_cocktail/js/material-kit.min.js?v=2.0.0' %}"></script>
 </body>
 </html>

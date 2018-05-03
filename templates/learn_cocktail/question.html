@@ -20,7 +20,7 @@
     <div class="card-body">
       <p class="h5 card-title">選択肢</p>
       <div class="card-text btn-group d-block" data-toggle="buttons">
-        <ul>
+        <ul class="pl-2">
           {% for material in form.choice_materials %}
           <li class="btn btn-outline-info m-1">
             {{ material.tag }}{{ material.choice_label }}
