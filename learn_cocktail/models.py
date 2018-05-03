@@ -51,7 +51,7 @@ class Cocktail(models.Model):
                                        through='Recipe',
                                        through_fields=('cocktail', 'material'),
                                        related_name='recipe_materials')
-    alc_percent = models.PositiveIntegerField(default=0)
+    # alc_percent = models.PositiveIntegerField(default=0)
     how_to_make = models.ForeignKey('HowToMake', on_delete=models.CASCADE)
     # base_material = models.ForeignKey('Material', on_delete=models.CASCADE,
     #                                   related_name='base_material',
