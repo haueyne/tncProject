@@ -16,7 +16,7 @@ class RecipeInline(admin.TabularInline):
 class CocktailAdmin(admin.ModelAdmin):
     inlines = [RecipeInline]
     list_display = ('name',
-                    'alc_percent',
+                    # 'alc_percent',
                     # 'base_material',
                     'how_to_make',
                     'is_show')
