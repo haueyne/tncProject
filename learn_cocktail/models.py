@@ -68,20 +68,20 @@ class Cocktail(models.Model):
 
 class Recipe(models.Model):
     """カクテルレシピ"""
-    UNIT_OF_QUANTITY_CHOICES = (
-        ('ml', 'ml'),
-        ('tsp', 'ティースプーン'),
-        # ('pq', '適量'),
-    )
+    # UNIT_OF_QUANTITY_CHOICES = (
+    #     ('ml', 'ml'),
+    #     ('tsp', 'ティースプーン'),
+    #     ('pq', '適量'),
+    # )
 
     cocktail = models.ForeignKey('Cocktail', on_delete=models.CASCADE)
     material = models.ForeignKey('Material', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(blank=True, null=True)
-    unit_of_quantity = models.CharField(
-        max_length=4,
-        choices=UNIT_OF_QUANTITY_CHOICES,
-        default=UNIT_OF_QUANTITY_CHOICES[0][0],
-    )
+    # unit_of_quantity = models.CharField(
+    #     max_length=4,
+    #     choices=UNIT_OF_QUANTITY_CHOICES,
+    #     default=UNIT_OF_QUANTITY_CHOICES[0][0],
+    # )
 
     class Meta:
         verbose_name = "レシピ"
