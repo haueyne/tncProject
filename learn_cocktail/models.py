@@ -71,7 +71,7 @@ class Recipe(models.Model):
     UNIT_OF_QUANTITY_CHOICES = (
         ('ml', 'ml'),
         ('tsp', 'ティースプーン'),
-        ('pq', '適量'),
+        # ('pq', '適量'),
     )
 
     cocktail = models.ForeignKey('Cocktail', on_delete=models.CASCADE)
