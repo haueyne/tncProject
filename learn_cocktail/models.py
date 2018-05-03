@@ -45,6 +45,7 @@ class HowToMake(models.Model):
 
 class Cocktail(models.Model):
     """カクテル"""
+
     name = models.CharField(max_length=128, unique=True)
     materials = models.ManyToManyField(Material,
                                        through='Recipe',
@@ -52,8 +53,9 @@ class Cocktail(models.Model):
                                        related_name='recipe_materials')
     alc_percent = models.PositiveIntegerField(default=0)
     how_to_make = models.ForeignKey('HowToMake', on_delete=models.CASCADE)
-    base_material = models.ForeignKey('Material', on_delete=models.CASCADE,
-                                      related_name='base_material')
+    # base_material = models.ForeignKey('Material', on_delete=models.CASCADE,
+    #                                   related_name='base_material',
+    #                                   )
     is_show = models.BooleanField(default=True)
 
     class Meta:
