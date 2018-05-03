@@ -53,8 +53,7 @@ class Cocktail(models.Model):
     alc_percent = models.PositiveIntegerField(default=0)
     how_to_make = models.ForeignKey('HowToMake', on_delete=models.CASCADE)
     base_material = models.ForeignKey('Material', on_delete=models.CASCADE,
-                                      related_name='base_material',
-                                      default=Material.objects.get(name='ウォッカ').pk)
+                                      related_name='base_material')
     is_show = models.BooleanField(default=True)
 
     class Meta:
