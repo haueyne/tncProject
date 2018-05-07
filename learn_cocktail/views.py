@@ -2,6 +2,7 @@ from random import randint
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models.aggregates import Count
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import QuestionForm
 from .models import Cocktail, Material
 
@@ -67,7 +68,11 @@ def answer(request):
 
 
 def cocktail_list(request):
-    cocktails = Cocktail.objects.all()
+    cocktail_objs = Cocktail.objects.all()
+    paginator = Paginator(cocktail_objs, 10)  # show 10 cocktails per page
+
+    page = request.GET.get('page', '1')
+    cocktails = paginator.get_page(page)
     return render(request, 'learn_cocktail/cocktail_list.html', {
         'cocktails': cocktails,
     })
