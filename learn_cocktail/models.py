@@ -54,7 +54,7 @@ class Cocktail(models.Model):
                                        through_fields=('cocktail', 'material'),
                                        related_name='recipe_materials',
                                        verbose_name='原料名')
-    alc_percent = models.FloatField(default=0.0, verbose_name='度数(%)')
+    alc_percent = models.FloatField(default=0.0, null=True, verbose_name='度数(%)')
     how_to_make = models.ForeignKey('HowToMake',
                                     on_delete=models.CASCADE,
                                     verbose_name='製法')
@@ -88,6 +88,7 @@ class Recipe(models.Model):
     quantity = models.PositiveIntegerField(default=0, verbose_name='分量')
     unit_of_quantity = models.CharField(
         max_length=4,
+        null=True,
         choices=UNIT_OF_QUANTITY_CHOICES,
         default=UNIT_OF_QUANTITY_CHOICES[0][0],
         verbose_name='分量単位',
