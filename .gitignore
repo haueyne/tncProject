@@ -2,6 +2,5 @@ db.sqlite3
 .idea/*
 **/__pycache__/*
 *.pyc
-*/migrations/*
 local_settings.py
 staticfiles

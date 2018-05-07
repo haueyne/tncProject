@@ -5,8 +5,8 @@ from django.db import models
 
 class Kind(models.Model):
     """カクテル原料の種別"""
-    name = models.CharField(max_length=32, unique=True)
-    is_show = models.BooleanField(default=True)
+    name = models.CharField(max_length=32, unique=True, verbose_name='種別名')
+    is_show = models.BooleanField(default=True, verbose_name='表示可否')
 
     class Meta:
         verbose_name = "種別"
@@ -18,9 +18,11 @@ class Kind(models.Model):
 
 class Material(models.Model):
     """カクテル原料"""
-    name = models.CharField(max_length=128, unique=True)
-    kind = models.ForeignKey('Kind', on_delete=models.CASCADE)
-    is_show = models.BooleanField(default=True)
+    name = models.CharField(max_length=128, unique=True, verbose_name='原料名')
+    kind = models.ForeignKey('Kind',
+                             on_delete=models.CASCADE,
+                             verbose_name='カクテル種別')
+    is_show = models.BooleanField(default=True, verbose_name='表示可否')
 
     class Meta:
         verbose_name = "原料"
@@ -32,8 +34,8 @@ class Material(models.Model):
 
 class HowToMake(models.Model):
     """カクテルの作り方"""
-    name = models.CharField(max_length=16, unique=True)
-    is_show = models.BooleanField(default=True)
+    name = models.CharField(max_length=16, unique=True, verbose_name='製法名')
+    is_show = models.BooleanField(default=True, verbose_name='表示可否')
 
     class Meta:
         verbose_name = "製法"
@@ -46,17 +48,22 @@ class HowToMake(models.Model):
 class Cocktail(models.Model):
     """カクテル"""
 
-    name = models.CharField(max_length=128, unique=True)
+    name = models.CharField(max_length=128, unique=True, verbose_name='カクテル名')
     materials = models.ManyToManyField(Material,
                                        through='Recipe',
                                        through_fields=('cocktail', 'material'),
-                                       related_name='recipe_materials')
-    # alc_percent = models.PositiveIntegerField(default=0)
-    how_to_make = models.ForeignKey('HowToMake', on_delete=models.CASCADE)
-    # base_material = models.ForeignKey('Material', on_delete=models.CASCADE,
-    #                                   related_name='base_material',
-    #                                   )
-    is_show = models.BooleanField(default=True)
+                                       related_name='recipe_materials',
+                                       verbose_name='原料名')
+    alc_percent = models.FloatField(default=0.0, verbose_name='度数(%)')
+    how_to_make = models.ForeignKey('HowToMake',
+                                    on_delete=models.CASCADE,
+                                    verbose_name='製法')
+    base_material = models.ForeignKey('Material',
+                                      on_delete=models.CASCADE,
+                                      null=True,
+                                      related_name='base_material',
+                                      verbose_name='ベース原料')
+    is_show = models.BooleanField(default=True, verbose_name='表示可否')
 
     class Meta:
         verbose_name = "カクテル"
@@ -68,20 +75,23 @@ class Cocktail(models.Model):
 
 class Recipe(models.Model):
     """カクテルレシピ"""
-    # UNIT_OF_QUANTITY_CHOICES = (
-    #     ('ml', 'ml'),
-    #     ('tsp', 'ティースプーン'),
-    #     ('pq', '適量'),
-    # )
+    UNIT_OF_QUANTITY_CHOICES = (
+        ('ml', 'ml'),
+        ('tsp', 'ティースプーン'),
+        # ('pq', '適量'),
+    )
 
-    cocktail = models.ForeignKey('Cocktail', on_delete=models.CASCADE)
-    material = models.ForeignKey('Material', on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(blank=True, null=True)
-    # unit_of_quantity = models.CharField(
-    #     max_length=4,
-    #     choices=UNIT_OF_QUANTITY_CHOICES,
-    #     default=UNIT_OF_QUANTITY_CHOICES[0][0],
-    # )
+    cocktail = models.ForeignKey('Cocktail', on_delete=models.CASCADE,
+                                 verbose_name='カクテル')
+    material = models.ForeignKey('Material', on_delete=models.CASCADE,
+                                 verbose_name='原料')
+    quantity = models.PositiveIntegerField(default=0, verbose_name='分量')
+    unit_of_quantity = models.CharField(
+        max_length=4,
+        choices=UNIT_OF_QUANTITY_CHOICES,
+        default=UNIT_OF_QUANTITY_CHOICES[0][0],
+        verbose_name='分量単位',
+    )
 
     class Meta:
         verbose_name = "レシピ"
