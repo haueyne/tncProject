@@ -10,15 +10,4 @@ class Migration(migrations.Migration):
         ('learn_cocktail', '0001_initial'),
     ]
 
-    operations = [
-        migrations.AddField(
-            model_name='cocktail',
-            name='how_to_make',
-            field=models.ForeignKey(default=True, on_delete=django.db.models.deletion.CASCADE, to='learn_cocktail.HowToMake'),
-        ),
-        migrations.AddField(
-            model_name='cocktail',
-            name='materials',
-            field=models.ManyToManyField(through='learn_cocktail.Recipe', to='learn_cocktail.Material'),
-        ),
-    ]
+    pass
