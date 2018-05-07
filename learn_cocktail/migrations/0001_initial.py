@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=128)),
+                ('how_to_make', models.ForeignKey(default=True, on_delete=django.db.models.deletion.CASCADE, to='learn_cocktail.HowToMake')),
+                ('materials', models.ManyToManyField(through='learn_cocktail.Recipe', to='learn_cocktail.Material')),
                 ('is_show', models.BooleanField(default=True)),
             ],
             options={
