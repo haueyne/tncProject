@@ -21,6 +21,7 @@ def _check_answer(cocktail, choiced_materials):
     # 結果のデフォルト値(不正解)
     result = {'text': '不正解です', 'css-class': 'text-danger'}
     answer_item_css = {}
+    icon = {}
     match_counter = 0
 
     cocktail_materials = cocktail.materials.all()
@@ -28,12 +29,15 @@ def _check_answer(cocktail, choiced_materials):
         if material in choiced_materials:
             match_counter += 1
             answer_item_css[material.pk] = 'list-group-item-success'
+            icon[material.pk] = 'check'
         else:
             answer_item_css[material.pk] = 'list-group-item-danger'
+            icon[material.pk] = 'error'
     if match_counter == len(cocktail_materials):
         result['text'] = '正解です'
         result['css-class'] = 'text-success'
     result['answer-css-set'] = answer_item_css
+    result['icon'] = icon
     return result
 
 
@@ -64,6 +68,7 @@ def answer(request):
         'result_txt': ans_result['text'],
         'result_css_cls': ans_result['css-class'],
         'answer_item_css_cls': ans_result['answer-css-set'],
+        'answer_result_icon': ans_result['icon'],
     })
 
 

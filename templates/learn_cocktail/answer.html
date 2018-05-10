@@ -13,10 +13,10 @@
   <div class="card-body">
     <p class="h3 card-title">{{ q_cocktail }}</p>
     <p class="card-text">
-      <ul class="pl-4 list-group">
+      <ul class="pl-2 list-group">
         {% for material in q_cocktail.materials.all %}
         <li class="m-1 list-group-item {{ answer_item_css_cls|get_dict_value:material.pk }} col-xs-8 col-sm-8 col-md-8 col-xl-8">
-          {{ material }}
+          <i class="material-icons">{{ answer_result_icon|get_dict_value:material.pk }}</i>{{ material }}
         </li>
         {% endfor %}
       </ul>
