@@ -35,9 +35,12 @@
             </div>
             <div class="modal-body">
               <ul class="list-group">
-                {% for material in cocktail.materials.all %}
+                {% for recipe in cocktail.recipe_set.all %}
                   <li class="list-group-item list-group-item-info m-1">
-                    {{ material }}
+                    <div class="row">
+                      <div class="col">{{ recipe.material }}</div>
+                      <div class="col-2">{{ recipe.quantity }}{{ recipe.unit_of_quantity }}</div>
+                    </div>
                   </li>
                 {% endfor %}
               </ul>
