@@ -47,6 +47,7 @@ class HowToMake(models.Model):
 
 class Cocktail(models.Model):
     """カクテル"""
+    IMP_CHOICES = tuple(zip(range(1, 6), range(1, 6)))
 
     name = models.CharField(max_length=128, unique=True, verbose_name='カクテル名')
     materials = models.ManyToManyField(Material,
@@ -63,6 +64,8 @@ class Cocktail(models.Model):
                                       null=True,
                                       related_name='base_material',
                                       verbose_name='ベース原料')
+    importance = models.PositiveIntegerField(choices=IMP_CHOICES, default=IMP_CHOICES[0][0],
+                                             verbose_name='頻出度合い')
     is_show = models.BooleanField(default=True, verbose_name='表示可否')
 
     class Meta:

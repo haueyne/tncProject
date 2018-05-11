@@ -1,7 +1,7 @@
-from random import randint
+import numpy as np
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.db.models.aggregates import Count
+from django.db.models.aggregates import Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import QuestionForm
 from .models import Cocktail, Material
@@ -9,11 +9,19 @@ from .models import Cocktail, Material
 # Create your views here.
 
 
-def _get_one_item_randomly(model):
-    """指定モデルからランダムに１件取得する"""
-    count = model.objects.aggregate(count=Count('id'))['count']
-    random_index = randint(0, count - 1)
-    return model.objects.all()[random_index]
+def get_weighted_item_randomly(model, extract_num=1, weighted_field='importance'):
+    """指定モデルから重み付けランダム抽出を行う
+
+    :param model: 対象モデル
+    :param extract_num: 抽出数
+    :param weighted_field: 重み付け定義しているフィールド
+    :return: nmpy.ndarray
+    """
+    total_importance = model.objects.aggregate(Sum(weighted_field))[weighted_field + '__sum']
+    weighted = [item[weighted_field] / total_importance
+                for item in model.objects.values(weighted_field)]
+    extract_num = extract_num if extract_num <= len(weighted) else weighted
+    return np.random.choice(model.objects.all(), extract_num, replace=True, p=weighted)
 
 
 def _check_answer(cocktail, choiced_materials):
@@ -49,7 +57,7 @@ def top(request):
 def question(request):
     """問題ページのビュー"""
     form = QuestionForm()
-    cocktail = _get_one_item_randomly(Cocktail)
+    cocktail = get_weighted_item_randomly(Cocktail)[0]
     return render(request, 'learn_cocktail/question.html', {
         'form': form,
         'question_cocktail': cocktail,
