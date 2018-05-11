@@ -66,6 +66,7 @@ class Cocktail(models.Model):
                                       verbose_name='ベース原料')
     importance = models.PositiveIntegerField(choices=IMP_CHOICES, default=IMP_CHOICES[0][0],
                                              verbose_name='頻出度合い')
+    notes = models.TextField(blank=True, null=True, verbose_name='注釈')
     is_show = models.BooleanField(default=True, verbose_name='表示可否')
 
     class Meta:
