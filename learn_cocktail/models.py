@@ -22,6 +22,7 @@ class Material(models.Model):
     kind = models.ForeignKey('Kind',
                              on_delete=models.CASCADE,
                              verbose_name='カクテル種別')
+    alc_percent = models.FloatField(default=0.0, verbose_name='度数(%)')
     is_show = models.BooleanField(default=True, verbose_name='表示可否')
 
     class Meta:
@@ -55,7 +56,6 @@ class Cocktail(models.Model):
                                        through_fields=('cocktail', 'material'),
                                        related_name='recipe_materials',
                                        verbose_name='原料名')
-    alc_percent = models.FloatField(default=0.0, null=True, verbose_name='度数(%)')
     how_to_make = models.ForeignKey('HowToMake',
                                     on_delete=models.CASCADE,
                                     verbose_name='製法')

@@ -11,12 +11,14 @@
   <img class="card-img-top" src="..." alt="Card image cap">
   -->
   <div class="card-body">
-    <p class="h3 card-title">{{ q_cocktail }}</p>
+    <p class="h3 card-title">{{ q_cocktail }} (alc:{{ q_alc_percent }}%)</p>
     <p class="card-text">
       <ul class="pl-2 list-group">
-        {% for material in q_cocktail.materials.all %}
-        <li class="m-1 list-group-item {{ answer_item_css_cls|get_dict_value:material.pk }} col-xs-8 col-sm-8 col-md-8 col-xl-8">
-          <i class="material-icons">{{ answer_result_icon|get_dict_value:material.pk }}</i>{{ material }}
+        {% for recipe in q_cocktail.recipe_set.all %}
+        <li class="m-1 list-group-item {{ answer_item_css_cls|get_dict_value:recipe.material.pk }} col-xs-8 col-sm-8 col-md-10 col-xl-10">
+          <div class="col-1"><i class="material-icons">{{ answer_result_icon|get_dict_value:recipe.material.pk }}</i></div>
+          <div class="col">{{ recipe.material }}</div>
+          <div class="col-4 col-md-3">{{ recipe.quantity }}{{ recipe.unit_of_quantity }}</div>
         </li>
         {% endfor %}
       </ul>

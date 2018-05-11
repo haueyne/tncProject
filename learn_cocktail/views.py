@@ -49,6 +49,20 @@ def _check_answer(cocktail, choiced_materials):
     return result
 
 
+def calc_cocktail_alcohol(cocktail, round_digit=2):
+    """指定カクテルのアルコール度数を計算して取得
+
+    :param round_digit: アルコール度数を四捨五入する小数点桁数
+    """
+    total_amount = 0
+    alcohol = 0
+    for recipe in cocktail.recipe_set.all():
+        total_amount += recipe.quantity
+        alcohol += recipe.quantity * recipe.material.alc_percent
+    alc_percent = alcohol / total_amount
+    return round(alc_percent, round_digit)
+
+
 def top(request):
     """トップページのビュー"""
     return render(request, 'learn_cocktail/top.html')
@@ -70,8 +84,10 @@ def answer(request):
     choiced_materials = Material.objects.filter(
         id__in=request.POST.getlist('choice_materials'))
     ans_result = _check_answer(q_cocktail, choiced_materials)
+    alc_percent = calc_cocktail_alcohol(q_cocktail)
     return render(request, 'learn_cocktail/answer.html', {
         'q_cocktail': q_cocktail,
+        'q_alc_percent': alc_percent,
         'choiced_materials': choiced_materials,
         'result_txt': ans_result['text'],
         'result_css_cls': ans_result['css-class'],

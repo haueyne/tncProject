@@ -27,7 +27,7 @@ class HowToMakeAdmin(admin.ModelAdmin):
 
 
 class MaterialAdmin(admin.ModelAdmin):
-    list_display = ('name', 'kind', 'is_show')
+    list_display = ('name', 'alc_percent', 'kind', 'is_show')
 
 
 admin.site.register(Kind, KindAdmin)
