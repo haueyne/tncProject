@@ -32,7 +32,7 @@ def awake():
         except Exception:
             print("error")
 
-        time.sleep(25 * minute)
+        time.sleep(5 * minute)
 
 
 t = threading.Thread(target=awake)
