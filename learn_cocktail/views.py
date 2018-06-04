@@ -59,7 +59,7 @@ def calc_cocktail_alcohol(cocktail, round_digit=2):
     for recipe in cocktail.recipe_set.all():
         total_amount += recipe.quantity
         alcohol += recipe.quantity * recipe.material.alc_percent
-    alc_percent = alcohol / total_amount
+    alc_percent = alcohol / total_amount if total_amount is not 0 else 0
     return round(alc_percent, round_digit)
 
 
