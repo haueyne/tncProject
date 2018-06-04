@@ -105,3 +105,10 @@ def cocktail_list(request):
     return render(request, 'learn_cocktail/cocktail_list.html', {
         'cocktails': cocktails,
     })
+
+
+def full_cocktai_list(request):
+    cocktails = Cocktail.objects.all()
+    return render(request, 'learn_cocktail/full_cocktai_list.html', {
+        'cocktails': cocktails,
+    })

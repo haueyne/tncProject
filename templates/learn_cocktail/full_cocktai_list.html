@@ -1,0 +1,64 @@
+{% extends "learn_cocktail/base.html" %}
+{% load extra_tags %}
+
+
+{% block title %}カクテル一覧{% endblock %}
+
+
+{% block main_contents %}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>カクテル名</th>
+        <th>ベース</th>
+        <th>作り方</th>
+        <th>度数</th>
+        <th>レシピ</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for cocktail in cocktails %}
+      <tr>
+        <td>{{ cocktail }}</td>
+        <td>{{ cocktail.base_material }}</td>
+        <td>{{ cocktail.how_to_make }}</td>
+        <td>{{ cocktail | get_alc_percent }} %</td>
+        <td>
+          {% for recipe in cocktail.recipe_set.all %}
+            <div class="">
+              {{ recipe.material }}: {{ recipe.quantity }}{{ recipe.unit_of_quantity }}
+            </div>
+          {% endfor %}
+        </td>
+      </tr>
+
+      <!-- モーダル表示部分 -->
+      <div class="modal fade" id="myModal_{{ cocktail.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">{{ cocktail }}</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ul class="list-group">
+                {% for recipe in cocktail.recipe_set.all %}
+                  <li class="list-group-item list-group-item-info m-1">
+                    <div class="row">
+                      <div class="col">{{ recipe.material }}</div>
+                      <div class="col-2">{{ recipe.quantity }}{{ recipe.unit_of_quantity }}</div>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+              <p>補足事項：{{ cocktail.notes }}</p>
+            </div><!-- /.modal-body -->
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock main_contents %}
