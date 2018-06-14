@@ -22,7 +22,7 @@ application = DjangoWhiteNoise(get_wsgi_application())
 
 def awake():
     minute = 60
-    awake_url = getattr(os.environ, 'AWAKE_URL', False)
+    awake_url = os.environ.get('AWAKE_URL')
 
     while awake_url:
         try:
