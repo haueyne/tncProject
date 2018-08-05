@@ -36,4 +36,4 @@ def awake():
 
 
 t = threading.Thread(target=awake)
-t.start()
+# t.start()
